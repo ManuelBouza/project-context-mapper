@@ -1,0 +1,7 @@
+{
+        "workbench.colorCustomizations": {
+        "titleBar.activeBackground": "#673AB7", // Deep Purple - Material Design
+        "titleBar.activeForeground": "#FFFFFF"  // Contraste de texto
+    },
+    "workbench.colorTheme": "Default Dark+"
+}
