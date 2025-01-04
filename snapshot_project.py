@@ -17,6 +17,8 @@ EXCLUDE_DIRS = {
     ".mypy_cache",
     ".venv", 
     "venv",
+    "playwright-report",
+    "test-results",
     
     # Directorios frontend
     "node_modules",
@@ -29,11 +31,12 @@ EXCLUDE_DIRS = {
 EXCLUDE_FILES = {
     ".DS_Store", 
     "thumbs.db", 
-    "desktop.ini"
+    "desktop.ini",
+    "yarn.lock"
 }
 
 # Extensiones adicionales a excluir
-ADDITIONAL_EXCLUDES = {".log", ".tmp"}  
+ADDITIONAL_EXCLUDES = {".log", ".tmp", ".png", ".svg", ".ico"}  
 
 def is_excluded(path: str) -> bool:
     """
@@ -82,9 +85,11 @@ def snapshot_project_content(project_path: str) -> None:
                     out_file.write(f"# Ruta: {file_path}\n")
                     out_file.write(f"#{'-' * 80}\n")
                     out_file.write(content + "\n\n")
+                    # Imprime la ruta del fichero guardado en el archivo
+                    print(f"Fichero guardado: {file_path}")
                 except Exception as e:
                     print(f"Error al leer {file_path}: {e}")
-    print(f"Archivo guardado: {output_file}")
+    print(f"\n Archivo guardado: {output_file}")
 
 
 if __name__ == "__main__":
