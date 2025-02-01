@@ -19,7 +19,7 @@ EXCLUDE_DIRS = {
     "venv",
     "playwright-report",
     "test-results",
-    ".ruff_cache"
+    ".ruff_cache",
     
     # Directorios frontend
     "node_modules",
