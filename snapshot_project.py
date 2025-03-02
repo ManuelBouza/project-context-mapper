@@ -37,7 +37,7 @@ EXCLUDE_FILES = {
 }
 
 # Extensiones adicionales a excluir
-ADDITIONAL_EXCLUDES = {".log", ".tmp", ".png", ".svg", ".ico"}  
+ADDITIONAL_EXCLUDES = {".log", ".tmp", ".png", ".svg", ".ico", ".xlsx"}  
 
 def is_excluded(path: str) -> bool:
     """
