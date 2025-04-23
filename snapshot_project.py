@@ -8,6 +8,11 @@ EXCLUDE_DIRS = {
     ".git",
     "coverage",
     ".cache",
+
+    # Directorios de Structurizr
+    ".structurizr",
+    "images",
+    "workspace.json",
     
     # Directorios backend
     "__pycache__",
