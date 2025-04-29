@@ -6,7 +6,6 @@ import sys
 EXCLUDE_DIRS = {
     # Directorios comunes
     ".git",
-    "coverage",
     ".cache",
 
     # Directorios de Structurizr
@@ -25,6 +24,7 @@ EXCLUDE_DIRS = {
     "playwright-report",
     "test-results",
     ".ruff_cache",
+    ".testmondata"
     
     # Directorios frontend
     "node_modules",
@@ -42,7 +42,7 @@ EXCLUDE_FILES = {
 }
 
 # Extensiones adicionales a excluir
-ADDITIONAL_EXCLUDES = {".log", ".tmp", ".png", ".svg", ".ico", ".xlsx", ".csv", ".txt"}  
+ADDITIONAL_EXCLUDES = {".log", ".tmp", ".png", ".svg", ".ico", ".xlsx", ".csv"}  
 
 def is_excluded(path: str) -> bool:
     """
