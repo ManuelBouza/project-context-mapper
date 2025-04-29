@@ -24,7 +24,7 @@ EXCLUDE_DIRS = {
     "playwright-report",
     "test-results",
     ".ruff_cache",
-    ".testmondata"
+    ".testmondata",
     
     # Directorios frontend
     "node_modules",
