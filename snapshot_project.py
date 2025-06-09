@@ -61,7 +61,7 @@ def is_excluded(path: str) -> bool:
     return False
 
 
-def snapshot_project_content(project_path: str) -> None:
+def snapshot_project_content(project_path: str, only_paths: bool = False) -> None:
     """
     Lee todos los archivos de un proyecto y guarda su contenido en un archivo txt.
     El nombre del archivo incluye la última parte de la ruta, la fecha actual y la hora.
@@ -84,15 +84,18 @@ def snapshot_project_content(project_path: str) -> None:
                 if is_excluded(file_path):
                     continue
                 try:
-                    # Lee el contenido del archivo
-                    with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
-                        content = f.read()
-                    # Guarda el contenido en el archivo de salida
+                    # Guarda la ruta en el archivo de salida
                     out_file.write(f"# Ruta: {file_path}\n")
-                    out_file.write(f"#{'-' * 80}\n")
-                    out_file.write(content + "\n\n")
-                    # Imprime la ruta del fichero guardado en el archivo
-                    print(f"Fichero guardado: {file_path}")
+
+                    if not only_paths:
+                        # Lee el contenido del archivo
+                        with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
+                            content = f.read()
+                        out_file.write(f"#{'-' * 80}\n")
+                        out_file.write(content + "\n\n")
+
+                    # Imprime la ruta del fichero guardado o registrado en el archivo
+                    print(f"Fichero registrado: {file_path}")
                 except Exception as e:
                     print(f"Error al leer {file_path}: {e}")
     print(f"\n Archivo guardado: {output_file}")
@@ -100,12 +103,15 @@ def snapshot_project_content(project_path: str) -> None:
 
 if __name__ == "__main__":
     # Configura la ruta del proyecto desde un parámetro de entrada
-    if len(sys.argv) != 2:
-        print("Uso: python main.py <ruta_del_proyecto>")
+    # Uso: python main.py <ruta_del_proyecto> [--only-paths]
+    if len(sys.argv) not in [2, 3]:
+        print("Uso: python main.py <ruta_del_proyecto> [--only-paths]")
         sys.exit(1)
     
     PROJECT_PATH = sys.argv[1]
+    ONLY_PATHS = len(sys.argv) == 3 and sys.argv[2] == "--only-paths"
+
     if not os.path.isdir(PROJECT_PATH):
         print("Error: La ruta especificada no es un directorio válido.")
     else:
-        snapshot_project_content(PROJECT_PATH)
+        snapshot_project_content(PROJECT_PATH, only_paths=ONLY_PATHS)
