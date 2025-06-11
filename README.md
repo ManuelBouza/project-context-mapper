@@ -81,7 +81,24 @@ Run the script indicating the project path and the desired options.
 
 **Basic usage:**
 
-python snapshot\_project.py \<project\_path> \[--only-paths] \[--whitelist=path1,path2,...]
+```bash
+python snapshot_project.py <project_path> [--only-paths] [--whitelist=path1,path2,...]
+```
+
+**Important note about `--whitelist` usage:**
+If your whitelist contains spaces after commas, **you must enclose the entire argument in quotes** to prevent the shell from splitting it into multiple arguments. For example:
+
+```bash
+python snapshot_project.py /path/to/project --only-paths "--whitelist=app/main.py, app/database.py, app/core/security.py"
+```
+
+Alternatively, you can omit spaces after commas:
+
+```bash
+python snapshot_project.py /path/to/project --only-paths --whitelist=app/main.py,app/database.py,app/core/security.py
+```
+
+---
 
 **Without extra parameters:**
 Captures the complete content of all relevant files.
@@ -101,13 +118,28 @@ Ideal to give the AI a global vision of the project, but only detailed content o
 **Usage examples:**
 
 Capture entire project (structure and content):
-python snapshot\_project.py /path/to/your/project
+
+```bash
+python snapshot_project.py /path/to/your/project
+```
 
 Only structure (folder and file names):
-python snapshot\_project.py /path/to/your/project --only-paths
+
+```bash
+python snapshot_project.py /path/to/your/project --only-paths
+```
 
 Only some specific files (structure + those full files):
-python snapshot\_project.py /path/to/your/project --only-paths --whitelist=src/app.py,README.md,requirements.txt
+
+```bash
+python snapshot_project.py /path/to/your/project --only-paths --whitelist=src/app.py,README.md,requirements.txt
+```
+
+Or with spaces in whitelist (use quotes):
+
+```bash
+python snapshot_project.py /path/to/your/project --only-paths "--whitelist=src/app.py, README.md, requirements.txt"
+```
 
 ---
 
@@ -238,7 +270,24 @@ Ejecuta el script indicando la ruta del proyecto y las opciones deseadas.
 
 **Uso básico:**
 
-python snapshot\_project.py \<ruta\_del\_proyecto> \[--only-paths] \[--whitelist=ruta1,ruta2,...]
+```bash
+python snapshot_project.py <ruta_del_proyecto> [--only-paths] [--whitelist=ruta1,ruta2,...]
+```
+
+**Nota importante sobre el uso de `--whitelist`:**
+Si tu whitelist contiene espacios después de las comas, **debes poner todo el argumento entre comillas** para evitar que el shell lo divida en múltiples argumentos. Por ejemplo:
+
+```bash
+python snapshot_project.py /ruta/a/proyecto --only-paths "--whitelist=app/main.py, app/database.py, app/core/security.py"
+```
+
+Alternativamente, puedes omitir los espacios después de las comas:
+
+```bash
+python snapshot_project.py /ruta/a/proyecto --only-paths --whitelist=app/main.py,app/database.py,app/core/security.py
+```
+
+---
 
 **Sin parámetros extra:**
   Captura el contenido completo de todos los archivos relevantes.
@@ -258,13 +307,28 @@ Ideal para darle a la IA la visión global del proyecto, pero solo el detalle co
 **Ejemplos de uso:**
 
 Capturar todo el proyecto (estructura y contenido):
-python snapshot\_project.py /ruta/a/tu/proyecto
+
+```bash
+python snapshot_project.py /ruta/a/tu/proyecto
+```
 
 Solo estructura (nombres de carpetas y archivos):
-python snapshot\_project.py /ruta/a/tu/proyecto --only-paths
+
+```bash
+python snapshot_project.py /ruta/a/tu/proyecto --only-paths
+```
 
 Solo algunos archivos concretos (estructura + esos ficheros completos):
-python snapshot\_project.py /ruta/a/tu/proyecto --only-paths --whitelist=src/app.py,README.md,requirements.txt
+
+```bash
+python snapshot_project.py /ruta/a/tu/proyecto --only-paths --whitelist=src/app.py,README.md,requirements.txt
+```
+
+O con espacios en whitelist (usa comillas):
+
+```bash
+python snapshot_project.py /ruta/a/tu/proyecto --only-paths "--whitelist=src/app.py, README.md, requirements.txt"
+```
 
 ---
 

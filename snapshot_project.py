@@ -143,9 +143,9 @@ def snapshot_project_content(
 
 if __name__ == "__main__":
     # Uso:
-    # python main.py <ruta_del_proyecto> [--only-paths] [--whitelist=ruta1,ruta2,...]
-    if len(sys.argv) < 2 or len(sys.argv) > 4:
-        print("Uso: python main.py <ruta_del_proyecto> [--only-paths] [--whitelist=ruta1,ruta2,...]")
+    # python main.py <ruta_del_proyecto> [--only-paths] [--whitelist=ruta1, ruta2, ruta3,...]
+    if len(sys.argv) < 2:
+        print("Uso: python main.py <ruta_del_proyecto> [--only-paths] [--whitelist=ruta1, ruta2, ...]")
         sys.exit(1)
     
     PROJECT_PATH = sys.argv[1]
@@ -157,7 +157,10 @@ if __name__ == "__main__":
             only_paths = True
         elif arg.startswith("--whitelist="):
             paths_str = arg[len("--whitelist="):]
-            new_paths = set(os.path.normpath(p.strip()) for p in paths_str.split(",") if p.strip())
+            # Separar por coma y eliminar espacios para aceptar listas con espacios tras coma
+            import re
+            parts = re.split(r'\s*,\s*', paths_str)
+            new_paths = set(os.path.normpath(p) for p in parts if p)
             whitelist.update(new_paths)
         else:
             print(f"Argumento desconocido: {arg}")
