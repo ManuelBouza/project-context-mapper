@@ -74,6 +74,18 @@ def path_in_whitelist(file_path: str, whitelist: Set[str]) -> bool:
             return True
     return False
 
+def verify_whitelist(project_path: str, whitelist: Set[str]) -> list[str]:
+    """
+    Verifica que todas las rutas de la whitelist existan dentro del directorio del proyecto.
+    Retorna una lista de rutas inválidas.
+    """
+    invalid_routes: list[str] = []
+    for route in whitelist:
+        # Permite rutas relativas o absolutas
+        abs_route = os.path.join(project_path, route) if not os.path.isabs(route) else route
+        if not os.path.exists(abs_route):
+            invalid_routes.append(route)
+    return invalid_routes
 
 def snapshot_project_content(
     project_path: str, 
@@ -169,5 +181,15 @@ if __name__ == "__main__":
     if not os.path.isdir(PROJECT_PATH):
         print("Error: La ruta especificada no es un directorio válido.")
         sys.exit(1)
+
+    # --------- VERIFICACIÓN DE RUTAS DE WHITELIST ---------
+    if whitelist:
+        invalid = verify_whitelist(PROJECT_PATH, whitelist)
+        if invalid:
+            print("\n⚠️  Las siguientes rutas de whitelist NO existen en el proyecto:")
+            for route in invalid:
+                print(f"   - {route}")
+            print("\nOperación abortada. Corrige las rutas y vuelve a ejecutar el script.")
+            sys.exit(2)
 
     snapshot_project_content(PROJECT_PATH, only_paths=only_paths, whitelist=whitelist)
